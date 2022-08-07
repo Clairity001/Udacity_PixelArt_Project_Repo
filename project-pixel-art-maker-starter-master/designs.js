@@ -1,10 +1,53 @@
-// Select color input
-// Select size input
+// Variable To Choose Grid Size:
+const sizePicker = document.querySelector('#sizePicker');
 
-// When size is submitted by the user, call makeGrid()
+//Variable of the Design Canvas:
+const table = document.querySelector('#pixelCanvas');
 
-function makeGrid() {
+//Default Size:
+makeGrid(10, 10);
 
-// Your code goes here!
+
+// #1. Submit The Size of The Grid:
+
+sizePicker.addEventListener('submit', function(event){
+
+    // #1. Clear Table:
+        event.preventDefault();
+
+        while (table.hasChildNodes()){
+            table.removeChild(table.firstChild)
+        }
+
+    // #2. Apply The User's Size:
+    const height = document.querySelector('#inputHeight');
+    const width = document.querySelector('#inputWidth');
+    makeGrid(height.value, width.value);
+
+});
+
+
+// #2. When Grid Size is Submitted by the user, call the makeGrid():
+function makeGrid(height, width) {
+
+    for (let y = 0; y < height; y++){
+
+        let row = table.insertRow(y);
+
+        for (let x = 0; x < width; x++){
+
+            let cell = row.insertCell(x);
+
+            //Set Colors To Cell:
+
+            cell.style.backgroundColor = "white";
+            cell.addEventListener('click', function (event){
+
+                event.preventDefault();
+                const color = document.querySelector('#colorPicker');
+                cell.style.backgroundColor = color.value;
+            });
+        }
+    }
 
 }
